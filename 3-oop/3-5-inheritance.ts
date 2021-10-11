@@ -6,17 +6,15 @@ import { log } from "console";
   type CoffeeCup = {
     shots: number;
     hasMilk: boolean;
-    temperature: "hot" | "ice";
   };
 
   interface CoffeeMaker {
-    makeCoffee(shots: number, temperature: "hot" | "ice"): CoffeeCup;
+    makeCoffee(shots: number): CoffeeCup;
   }
 
   class CoffeeMachine implements CoffeeMaker {
     private static BEANS_GRAMM_PER_SHOT: number = 10;
     private coffeeBeans: number = 0;
-    private temperature: string = "hot";
 
     constructor(coffeeBeans: number) {
       this.coffeeBeans = coffeeBeans;
@@ -38,30 +36,19 @@ import { log } from "console";
         console.log(`Grinding beans for ${shots} shots`);
       }
     }
-    private preheat(temperatuer: "hot" | "ice") {
-      if (temperatuer === "hot") {
-        console.log("Heating water..");
-      }
-    }
+    
 
     protected extract(shots: number): CoffeeCup {
       console.log(`Pulling ${shots} shots`);
       return {
         shots,
         hasMilk: false,
-        temperature: "hot",
       };
     }
 
-    makeCoffee(shots: number, temperature: "hot" | "ice"): CoffeeCup {
+    makeCoffee(shots: number): CoffeeCup {
       this.grindBeans(shots);
-      this.preheat(temperature);
       return this.extract(shots);
-      // if(this.coffeeBeans < shots * CoffeeMachine.BEANS_GRAMM_PER_SHOT){
-      //     throw new Error('Not enough coffee beans!!');
-      // }
-      // this.coffeeBeans -= shots * CoffeeMachine.BEANS_GRAMM_PER_SHOT;
-      //
     }
 
     clean() {
@@ -69,14 +56,25 @@ import { log } from "console";
     }
   }
 
-  class CaffeelatteMachine extends CoffeeMachine{
-    steamingMilk(){
+  class CaffelatteMachine extends CoffeeMachine{
+    constructor(coffeeBeans:number, public readonly serialNum: string){
+      super(coffeeBeans);
+    }
+
+    private steamingMilk(){
       console.log('Steaming Milk...')
     }
 
     makeCoffee(shots: number):CoffeeCup{
-      const coffee =  this.extract(shots);
-      return {...coffee, hasMilk: true}
+      const coffee =  super.makeCoffee(shots);
+      this.steamingMilk();
+      return {shots, hasMilk: true}
     }
   }
-}
+
+  const latteMachine = new CaffelatteMachine(32, 'SSSS');
+  console.log(latteMachine)
+  console.log('-----------------')
+  const coffee = latteMachine.makeCoffee(1);
+  console.log(coffee); // ---> return 값 출력
+  console.log(latteMachine.serialNum);
