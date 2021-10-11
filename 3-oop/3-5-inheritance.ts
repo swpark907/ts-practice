@@ -2,6 +2,7 @@ import { log } from "console";
 
 
 {
+
   type CoffeeCup = {
     shots: number;
     hasMilk: boolean;
@@ -43,7 +44,7 @@ import { log } from "console";
       }
     }
 
-    private extract(shots: number): CoffeeCup {
+    protected extract(shots: number): CoffeeCup {
       console.log(`Pulling ${shots} shots`);
       return {
         shots,
@@ -68,23 +69,14 @@ import { log } from "console";
     }
   }
 
-  class CaffeLatteMachine extends CoffeeMachine {
-    private steamMilk(): void {
-      console.log("Steaming milk..");
+  class CaffeelatteMachine extends CoffeeMachine{
+    steamingMilk(){
+      console.log('Steaming Milk...')
     }
 
-    makeCoffee(shots: number): CoffeeCup {
-      const coffee = super.makeCoffee(shots, "hot");
-      this.steamMilk();
-      return {
-        ...coffee,
-        hasMilk: true,
-      };
+    makeCoffee(shots: number):CoffeeCup{
+      const coffee =  this.extract(shots);
+      return {...coffee, hasMilk: true}
     }
   }
-
-  const machine = new CoffeeMachine(23);
-  const latteMachine = new CaffeLatteMachine(23);
-  const coffee = latteMachine.makeCoffee(1);
-  console.log(coffee);
 }
