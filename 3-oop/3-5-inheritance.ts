@@ -1,6 +1,3 @@
-import { log } from "console";
-
-
 {
 
   type CoffeeCup = {
@@ -77,4 +74,5 @@ import { log } from "console";
   console.log('-----------------')
   const coffee = latteMachine.makeCoffee(1);
   console.log(coffee); // ---> return 값 출력
-  console.log(latteMachine.serialNum);
+  console.log(latteMachine.serialNum)
+}
