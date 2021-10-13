@@ -71,7 +71,7 @@
       this.addSugar();
       return {
         shots,
-        hasSugar: true
+        sugar: true
       }
     }
   }
