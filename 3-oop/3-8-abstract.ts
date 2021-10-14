@@ -2,7 +2,7 @@
 
   type CoffeeCup = {
     shots: number;
-    hasMilk: boolean;
+    hasMilk?: boolean;
     sugar?: boolean;
   };
 
