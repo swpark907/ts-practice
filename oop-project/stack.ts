@@ -1,5 +1,7 @@
+import { timeStamp } from "console";
+
 interface Stack{
-    readonly size: number;
+    _size: number;
     push(value: string): void;
     pop(): string;
 }
@@ -11,6 +13,21 @@ type StackNode = {
 
 class StackImpl implements Stack{
     
+    _size: number = 0;
+    private head?: StackNode;
+
+    push(value: string): void{
+
+        this._size++;
+        const node: StackNode = {value, next: this.head}
+        this.head = node;
+    }
+
+    pop(): string{
+        this._size--;
+        delete this.head?.next;
+        return 'string';
+    }
 }
 
 // class Stackimpl implements Stack{
