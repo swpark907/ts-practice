@@ -1,5 +1,4 @@
-import { timeStamp } from "console";
-
+{
 interface Stack{
     readonly size: number;
     push(value: string): void;
@@ -54,4 +53,5 @@ while(stack.size !== 0){
 }
 
 // stack.pop(); 한번더 할 경우 에러
+}
 

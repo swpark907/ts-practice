@@ -47,6 +47,6 @@ const obj2 = {
     animal: '🐶'
 }
 
-function getValue<T, K extends keyof T>(obj: T, key: K) : T[K]{
+function getValue<T, K extends keyof T>(obj: T, key: K) : T[K]{ // extends, T[k]처럼 타입의 조건을 제한할 수 있다.
     return obj[key];
 }
