@@ -6,7 +6,7 @@
   
   type NetworkErrorState = {
     result: 'fail',
-    reason: 'offline' | 'down' | 'timeout'
+    reason: 'offline' | 'down' | 'timeout' // -> 예상가능한 에러이며 에러의 이유들을 보여줄 수 있도록 처리
   }
   type SuccessState = {
     result: 'success';
@@ -14,8 +14,8 @@
   
   type ResultState = SuccessState | NetworkErrorState;
   class NetworkClient{
-    tryConnect(){
-      throw new Error('no network');
+    tryConnect(): ResultState{
+      
     }
   }
   
